@@ -1,0 +1,127 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg: #04616E;
+    --surface: #161b22;
+    --surface2: #1c2333;
+    --border: #30363d;
+    --accent: #3fb950;
+    --accent-hover: #56d364;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --red: #f85149;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(63,185,80,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(63,185,80,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container { position: relative; z-index: 1; max-width: 660px; margin: 0 auto; }
+
+.back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); text-decoration: none; font-size: 13px;
+    margin-bottom: 32px; transition: color 0.2s;
+}
+.back-link:hover { color: var(--text); }
+.back-link::before { content: '←'; font-size: 16px; }
+
+.page-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+}
+.page-tag::before { content: ''; display: block; width: 20px; height: 2px; background: var(--accent); }
+
+h1 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px; }
+.subtitle { color: var(--muted); font-size: 13px; margin-bottom: 32px; }
+
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.card-header { padding: 18px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; background: var(--surface2); }
+.card-header-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.card-header-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; }
+.card-body { padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+
+.alert-error { background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3); color: var(--red); padding: 14px 16px; border-radius: 8px; font-size: 13px; }
+.alert-error strong { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.alert-error ul { margin: 0; padding-left: 18px; line-height: 1.8; }
+
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+label span.req { color: var(--red); margin-left: 2px; }
+label span.opt { color: var(--muted); font-size: 10px; letter-spacing: 0; text-transform: none; font-weight: 400; }
+
+input[type="text"], input[type="number"], input[type="date"] {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; padding: 11px 14px; outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s; appearance: none; -webkit-appearance: none;
+}
+input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(63,185,80,0.12); }
+input.input-error { border-color: var(--red); box-shadow: 0 0 0 3px rgba(248,81,73,0.1); }
+input::placeholder { color: #4a5568; }
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); cursor: pointer; }
+
+.field-error { color: var(--red); font-size: 11.5px; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+.field-error::before { content: '⚠'; }
+
+.upload-area {
+    border: 2px dashed var(--border); border-radius: 10px; padding: 20px;
+    cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    background: var(--surface2); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px; min-height: 120px; position: relative;
+}
+.upload-area:hover { border-color: var(--accent); background: rgba(63,185,80,0.04); }
+.upload-area.has-file { border-color: var(--accent); border-style: solid; }
+.upload-area.error-border { border-color: var(--red); }
+.upload-icon { font-size: 28px; line-height: 1; }
+.upload-label-text { font-size: 13px; color: var(--muted); text-align: center; }
+.upload-label-text strong { color: var(--accent); }
+.upload-hint { font-size: 11px; color: #4a5568; }
+
+#previewContainer { display: none; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+#previewImg { max-height: 160px; max-width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+#previewName { font-size: 12px; color: var(--muted); }
+#btnGantiGambar { font-size: 11px; color: var(--accent); background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0; }
+
+.divider { border: none; border-top: 1px solid var(--border); margin: 4px 0; }
+
+.form-actions { display: flex; gap: 12px; align-items: center; }
+.btn-submit {
+    flex: 1; background: var(--accent); color: #000; border: none; border-radius: 8px;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 13px 24px; cursor: pointer; transition: all 0.2s;
+}
+.btn-submit:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(63,185,80,0.3); }
+.btn-cancel {
+    padding: 13px 20px; border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.btn-cancel:hover { border-color: var(--text); color: var(--text); }
+
+@media (max-width: 480px) {
+    .form-row { grid-template-columns: 1fr; }
+    .form-actions { flex-direction: column-reverse; }
+    .btn-cancel { width: 100%; text-align: center; }
+}
