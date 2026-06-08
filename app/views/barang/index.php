@@ -65,15 +65,15 @@
             <td>#<?= $row['id'] ?></td>
             <td>
               <?php $foto = $row['thumb'] ?? $row['gambar'] ?? null; ?>
-              <?php if (!empty($foto) && file_exists(__DIR__ . '/../../' . $foto)): ?>
+              <?php if (!empty($foto) && file_exists(dirname(__DIR__, 3) . '/' . $foto)): ?>
                 <img src="../<?= htmlspecialchars($foto) ?>" alt="<?= htmlspecialchars($row['nama_barang']) ?>" class="foto-thumb">
               <?php else: ?>
                 <div class="foto-placeholder">📦</div>
               <?php endif; ?>
             </td>
             <td><?= htmlspecialchars($row['nama_barang']) ?></td>
-            <td><?= number_format($row['jumlah']) ?></td>
-            <td>Rp <?= number_format($row['harga']) ?></td>
+            <td><?= number_format($row['jumlah'], 0, ',', '.') ?></td>
+            <td>Rp <?= number_format($row['harga'], 0, ',', '.') ?></td>
             <td><?= date('d M Y', strtotime($row['tanggal_masuk'])) ?></td>
             <td>
               <a href="edit.php?id=<?= $row['id'] ?>" class="btn-edit">Edit</a>
